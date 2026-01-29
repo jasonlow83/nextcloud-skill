@@ -1,0 +1,84 @@
+{
+  "name": "nextcloud",
+  "description": "Upload, download, and manage files on a self-hosted Nextcloud instance via WebDAV",
+  "tools": {
+    "nextcloud_upload": {
+      "description": "Upload a local file to Nextcloud",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "localPath": {
+            "type": "string",
+            "description": "Path to the local file to upload"
+          },
+          "remotePath": {
+            "type": "string",
+            "description": "Destination path in Nextcloud (e.g., /Documents/file.txt)"
+          },
+          "overwrite": {
+            "type": "boolean",
+            "description": "Whether to overwrite if file exists",
+            "default": true
+          }
+        },
+        "required": ["localPath", "remotePath"]
+      }
+    },
+    "nextcloud_download": {
+      "description": "Download a file from Nextcloud to local storage",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "remotePath": {
+            "type": "string",
+            "description": "Source path in Nextcloud"
+          },
+          "localPath": {
+            "type": "string",
+            "description": "Local destination path (optional)"
+          }
+        },
+        "required": ["remotePath"]
+      }
+    },
+    "nextcloud_list": {
+      "description": "List files and folders in a Nextcloud directory",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Remote path to list (default: /)",
+            "default": "/"
+          }
+        }
+      }
+    },
+    "nextcloud_mkdir": {
+      "description": "Create a new folder in Nextcloud",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Full path of the new folder to create"
+          }
+        },
+        "required": ["path"]
+      }
+    },
+    "nextcloud_delete": {
+      "description": "Delete a file or folder from Nextcloud",
+      "parameters": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to delete"
+          }
+        },
+        "required": ["path"]
+      }
+    }
+  }
+}

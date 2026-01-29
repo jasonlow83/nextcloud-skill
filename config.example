@@ -1,0 +1,12 @@
+# Nextcloud Configuration Template
+# Copy this to ~/.clawdbot/nextcloud.env and fill in your values
+
+# Your Nextcloud URL (e.g., https://cloud.yourdomain.com)
+NEXTCLOUD_URL=""
+
+# Your Nextcloud username
+NEXTCLOUD_USERNAME=""
+
+# App password (NOT your main password)
+# Generate at: Nextcloud Settings → Security → App passwords
+NEXTCLOUD_APP_PASSWORD=""
