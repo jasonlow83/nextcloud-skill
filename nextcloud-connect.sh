@@ -1,8 +1,8 @@
 #!/bin/bash
-# Nextcloud WebDAV skill for Clawdbot
+# Nextcloud WebDAV skill for OpenClaw
 
-if [[ -f "$HOME/.clawdbot/nextcloud.env" ]]; then
-    source "$HOME/.clawdbot/nextcloud.env"
+if [[ -f "$HOME/.openclaw/nextcloud.env" ]]; then
+    source "$HOME/.openclaw/nextcloud.env"
 fi
 
 check_config() {

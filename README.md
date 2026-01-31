@@ -4,7 +4,7 @@ Upload, download, and manage files on a self-hosted Nextcloud instance via WebDA
 
 ## Overview
 
-This skill enables Clawdbot to interact with Nextcloud file storage using the WebDAV protocol. Perfect for:
+This skill enables OpenClaw to interact with Nextcloud file storage using the WebDAV protocol. Perfect for:
 - Backing up workspace files to Nextcloud
 - Syncing documents between local and cloud storage
 - Automating file management tasks
@@ -83,20 +83,20 @@ Delete a file or folder from Nextcloud.
 
 ## Installation
 
-### Option 1: ClawdHub (Recommended)
+### Option 1: OpenClawHub (Recommended)
 ```bash
-npx clawdhub@latest install nextcloud
+npx openclaw@latest install nextcloud
 ```
 
 ### Option 2: Manual
 Copy the `nextcloud` folder to your skills directory:
 ```bash
-cp -r nextcloud ~/.clawdbot/skills/
+cp -r nextcloud ~/.openclaw/skills/
 ```
 
 ## Configuration
 
-Requires environment variables or config file at `~/.clawdbot/nextcloud.env`:
+Requires environment variables or config file at `~/.openclaw/nextcloud.env`:
 
 | Variable | Description |
 |----------|-------------|
@@ -108,13 +108,13 @@ Requires environment variables or config file at `~/.clawdbot/nextcloud.env`:
 ### Create Config File
 ```bash
 # Create the config file
-cat > ~/.clawdbot/nextcloud.env << EOF
+cat > ~/.openclaw/nextcloud.env << EOF
 NEXTCLOUD_URL="https://your-nextcloud.example.com"
 NEXTCLOUD_USERNAME="your-username"
 NEXTCLOUD_APP_PASSWORD="your-app-password"
 NEXTCLOUD_WORKSPACE="My Workspace"  # Optional - all files stay here
 EOF
-chmod 600 ~/.clawdbot/nextcloud.env
+chmod 600 ~/.openclaw/nextcloud.env
 ```
 
 ## Setup Nextcloud App Password
@@ -122,7 +122,7 @@ chmod 600 ~/.clawdbot/nextcloud.env
 1. Log into your Nextcloud instance (web interface)
 2. Click your profile picture → **Settings**
 3. Go to **Security** (left sidebar)
-4. Under "App passwords", enter "Clawdbot" as the name
+4. Under "App passwords", enter "OpenClaw" as the name
 5. Click **Create new app password**
 6. Copy the generated password and use it as `NEXTCLOUD_APP_PASSWORD`
 
@@ -142,16 +142,16 @@ All paths are relative to the configured workspace folder:
 
 ```bash
 # List files in workspace directory
-clawdhub skill run nextcloud list '/'
+openclaw skill run nextcloud list '/'
 
 # Upload a file (goes to WORKSPACE/file.md)
-clawdhub skill run nextcloud upload '/local/file.md' '/file.md'
+openclaw skill run nextcloud upload '/local/file.md' '/file.md'
 
 # Download a file (from WORKSPACE/file.md)
-clawdhub skill run nextcloud download '/file.md' '/local/downloads/'
+openclaw skill run nextcloud download '/file.md' '/local/downloads/'
 
 # Delete from workspace
-clawdhub skill run nextcloud delete '/file.md'
+openclaw skill run nextcloud delete '/file.md'
 ```
 
 ## Requirements

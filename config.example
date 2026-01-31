@@ -1,5 +1,5 @@
 # Nextcloud Configuration Template
-# Copy this to ~/.clawdbot/nextcloud.env and fill in your values
+# Copy this to ~/.openclaw/nextcloud.env and fill in your values
 
 # Your Nextcloud URL (e.g., https://cloud.yourdomain.com)
 NEXTCLOUD_URL=""
