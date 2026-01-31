@@ -103,6 +103,7 @@ Requires environment variables or config file at `~/.clawdbot/nextcloud.env`:
 | `NEXTCLOUD_URL` | Full Nextcloud URL (e.g., "https://cloud.example.com") |
 | `NEXTCLOUD_USERNAME` | Your Nextcloud username |
 | `NEXTCLOUD_APP_PASSWORD` | App-specific password (NOT your main password) |
+| `NEXTCLOUD_WORKSPACE` | (Optional) Workspace folder for all operations (default: "Mark's Workspace") |
 
 ### Create Config File
 ```bash
@@ -111,6 +112,7 @@ cat > ~/.clawdbot/nextcloud.env << EOF
 NEXTCLOUD_URL="https://your-nextcloud.example.com"
 NEXTCLOUD_USERNAME="your-username"
 NEXTCLOUD_APP_PASSWORD="your-app-password"
+NEXTCLOUD_WORKSPACE="My Workspace"  # Optional - all files stay here
 EOF
 chmod 600 ~/.clawdbot/nextcloud.env
 ```
@@ -126,28 +128,30 @@ chmod 600 ~/.clawdbot/nextcloud.env
 
 ## Usage Notes
 
-- Paths are relative to your Nextcloud root (starts with `/`)
+- All file operations stay within the configured `NEXTCLOUD_WORKSPACE` folder
+- Paths in tool parameters are relative to the workspace (e.g., "/file.txt" goes to "{WORKSPACE}/file.txt")
+- The workspace defaults to "Mark's Workspace" if not configured
 - Folders must exist before uploading files into them (use `nextcloud_mkdir` first)
 - The WebDAV endpoint is automatically constructed as `{NEXTCLOUD_URL}/remote.php/dav/files/{USERNAME}/`
+- Special characters in workspace name (spaces, apostrophes) are automatically URL-encoded
 - No external dependencies required (uses standard `curl`)
 
 ## Example Workflow
 
+All paths are relative to the configured workspace folder:
+
 ```bash
-# List files in root directory
+# List files in workspace directory
 clawdhub skill run nextcloud list '/'
 
-# Create a workspace folder
-clawdhub skill run nextcloud mkdir '/MyWorkspace'
+# Upload a file (goes to WORKSPACE/file.md)
+clawdhub skill run nextcloud upload '/local/file.md' '/file.md'
 
-# Upload a file
-clawdhub skill run nextcloud upload '/local/file.md' '/MyWorkspace/file.md'
+# Download a file (from WORKSPACE/file.md)
+clawdhub skill run nextcloud download '/file.md' '/local/downloads/'
 
-# Download a file
-clawdhub skill run nextcloud download '/MyWorkspace/file.md' '/local/downloads/'
-
-# Delete when done
-clawdhub skill run nextcloud delete '/MyWorkspace'
+# Delete from workspace
+clawdhub skill run nextcloud delete '/file.md'
 ```
 
 ## Requirements
